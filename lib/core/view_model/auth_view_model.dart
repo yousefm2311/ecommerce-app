@@ -112,6 +112,7 @@ class AuthViewModel extends GetxController {
           colorText: Colors.white,
         );
         isLoading.value = false;
+        Get.offAllNamed(AppRoutes.home);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
