@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:ecommerce_app/constance.dart';
+import 'package:ecommerce_app/routes/routes.dart';
 import 'package:ecommerce_app/view/widget/MyAppBar.dart';
 import 'package:ecommerce_app/view/widget/MyBotton.dart';
 import 'package:ecommerce_app/view/widget/MyText.dart';
@@ -21,16 +22,14 @@ class RegisterScreen extends StatelessWidget {
       appBar: MyAppBar(
         leading: Padding(
           padding: const EdgeInsets.all(6.0),
-          child: InkWell(
+          child: MyOptionsContainer(
+            height: 10,
             onTap: () {
               Get.back();
             },
-            child: MyOptionsContainer(
-              iconSize: 20,
-              height: 10,
-              width: 10,
-              icon: Icons.arrow_back_ios_new_rounded,
-            ),
+            width: 10,
+            icon: Icons.arrow_back_ios_new_rounded,
+            iconSize: 20,
           ),
         ),
         text: MyText(
@@ -56,6 +55,8 @@ class RegisterScreen extends StatelessWidget {
                       height: 65.0,
                       width: double.infinity,
                       icon: MdiIcons.google,
+                      iconSize: 40,
+                      onTap: () {},
                     ),
                   ),
                   const SizedBox(width: 20.0),
@@ -64,6 +65,8 @@ class RegisterScreen extends StatelessWidget {
                       width: double.infinity,
                       height: 65.0,
                       icon: MdiIcons.facebook,
+                      iconSize: 40,
+                      onTap: () {},
                     ),
                   ),
                 ],
@@ -75,6 +78,11 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
+                type: TextInputType.name,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
                 text: 'Enter Your Name',
                 controller: emailController,
                 isShow: false,
@@ -86,6 +94,11 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
+                type: TextInputType.emailAddress,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
                 text: 'Enter Your Email Address',
                 controller: emailController,
                 isShow: false,
@@ -97,6 +110,11 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
+                type: TextInputType.visiblePassword,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
                 text: 'Enter Your Password',
                 suffixIcon: const Icon(Icons.visibility_rounded),
                 controller: passwordController,
@@ -130,7 +148,7 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(width: 5),
                   InkWell(
                     onTap: () {
-                      Get.off('');
+                      Get.offAllNamed(AppRoutes.login);
                     },
                     child: MyText(
                       text: 'Login',

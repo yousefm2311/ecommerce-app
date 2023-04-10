@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:ecommerce_app/constance.dart';
+import 'package:ecommerce_app/core/view_model/auth_view_model.dart';
 import 'package:ecommerce_app/routes/routes.dart';
 import 'package:ecommerce_app/view/widget/MyAppBar.dart';
 import 'package:ecommerce_app/view/widget/MyBotton.dart';
@@ -9,10 +10,9 @@ import 'package:ecommerce_app/view/widget/MyTextField.dart';
 import 'package:ecommerce_app/view/widget/containerOptions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetWidget<AuthViewModel> {
   LoginScreen({super.key});
 
   var emailController = TextEditingController();
@@ -44,15 +44,23 @@ class LoginScreen extends StatelessWidget {
                     child: MyOptionsContainer(
                       height: 65.0,
                       width: double.infinity,
+                      onTap: () {
+                        controller.googleSignIn();
+                      },
                       icon: MdiIcons.google,
+                      iconSize: 40,
                     ),
                   ),
                   const SizedBox(width: 20.0),
                   Expanded(
                     child: MyOptionsContainer(
+                      onTap: () {
+                        controller.facebookSignIn();
+                      },
                       width: double.infinity,
                       height: 65.0,
                       icon: MdiIcons.facebook,
+                      iconSize: 40,
                     ),
                   ),
                 ],
@@ -64,6 +72,11 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
+                type: TextInputType.emailAddress,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
                 text: 'Enter Your Email Address',
                 controller: emailController,
                 isShow: false,
@@ -75,6 +88,11 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
+                type: TextInputType.visiblePassword,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
                 text: 'Enter Your Password',
                 suffixIcon: const Icon(Icons.visibility_rounded),
                 controller: passwordController,
@@ -86,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                 child: InkWell(
                   onTap: () {},
                   child: MyText(
-                    text: 'forgot password ?!',
+                    text: 'forgot password ? ',
                     textStyle: TextStyle(color: primaryColor.shade500),
                   ),
                 ),
@@ -106,27 +124,17 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MyText(
-                      text: 'Don\'t have an account?',
-                      textStyle: Theme.of(context).textTheme.bodySmall),
-                  const SizedBox(width: 5),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.register);
-                    },
-                    child: MyText(
-                      text: 'Sign Up',
-                      textStyle: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                        color: primaryColor.shade300,
-                      ),
-                    ),
-                  ),
-                ],
+              MyBotton(
+                height: 60,
+                borderShow: true,
+                onPressed: () {
+                  Get.toNamed(AppRoutes.register);
+                },
+                width: double.infinity,
+                text: MyText(
+                  text: 'Register',
+                  textStyle: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
             ],
           ),

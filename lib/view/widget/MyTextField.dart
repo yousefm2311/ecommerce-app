@@ -5,24 +5,33 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyTextFormField extends StatelessWidget {
-  MyTextFormField({
-    super.key,
-    required this.controller,
-    required this.isShow,
-    this.suffixIcon,
-    required this.text,
-  });
+  MyTextFormField(
+      {super.key,
+      required this.controller,
+      required this.isShow,
+      this.suffixIcon,
+      required this.text,
+      this.onSave,
+      this.validator,
+      required this.type});
 
   final TextEditingController controller;
   final bool isShow;
   Widget? suffixIcon;
+  final TextInputType type;
   final String text;
+  Function(String?)? onSave;
+  String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: type,
       controller: controller,
+      onSaved: onSave,
+      validator: validator,
       obscureText: isShow,
+      style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black),
       decoration: InputDecoration(
         hintText: text,
         hintStyle: Theme.of(context).textTheme.bodyMedium,

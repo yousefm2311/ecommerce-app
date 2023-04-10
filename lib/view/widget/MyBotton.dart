@@ -1,21 +1,23 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, must_be_immutable
 
 import 'package:flutter/material.dart';
 
 class MyBotton extends StatelessWidget {
-  const MyBotton(
+  MyBotton(
       {super.key,
       required this.onPressed,
       required this.text,
-      required this.color,
+      this.color,
       required this.width,
-      required this.height});
+      required this.height,
+      this.borderShow = false});
 
   final Function() onPressed;
   final Widget text;
-  final Color color;
+  Color? color;
   final double width;
   final double height;
+  bool borderShow;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,14 @@ class MyBotton extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.circular(13.0)),
+        border: borderShow
+            ? Border.all(width: 1.5, color: Colors.grey.shade300)
+            : null,
+        color: color,
+        borderRadius: BorderRadius.circular(
+          13.0,
+        ),
+      ),
       child: MaterialButton(
         onPressed: onPressed,
         child: text,
