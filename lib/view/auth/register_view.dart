@@ -8,22 +8,32 @@ import 'package:ecommerce_app/view/widget/MyBotton.dart';
 import 'package:ecommerce_app/view/widget/MyText.dart';
 import 'package:ecommerce_app/view/widget/MyTextField.dart';
 import 'package:ecommerce_app/view/widget/containerOptions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class LoginScreen extends GetWidget<AuthViewModel> {
-  LoginScreen({super.key});
-
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+class Registerview extends GetWidget<AuthViewModel> {
+  const Registerview({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: MyOptionsContainer(
+            height: 10,
+            onTap: () {
+              Get.back();
+            },
+            width: 10,
+            icon: Icons.arrow_back_ios_new_rounded,
+            iconSize: 20,
+          ),
+        ),
         text: MyText(
-          text: 'Login',
+          text: 'Sign Up',
         ),
       ),
       body: SingleChildScrollView(
@@ -34,7 +44,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
             children: [
               const SizedBox(height: 40.0),
               Text(
-                'Login in with one of the following options',
+                'Sign Up in with one of the following options',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 20.0),
@@ -44,31 +54,43 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                     child: MyOptionsContainer(
                       height: 65.0,
                       width: double.infinity,
-                      onTap: () {
-                        controller.googleSignIn();
-                      },
                       icon: MdiIcons.google,
                       iconSize: 40,
+                      onTap: () {},
                     ),
                   ),
                   const SizedBox(width: 20.0),
                   Expanded(
                     child: MyOptionsContainer(
-                      onTap: () {
-                        controller.facebookSignIn();
-                      },
                       width: double.infinity,
                       height: 65.0,
                       icon: MdiIcons.facebook,
                       iconSize: 40,
+                      onTap: () {},
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 40.0),
               MyText(
+                text: 'Name',
+                textStyle: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10.0),
+              MyTextFormField(
+                type: TextInputType.name,
+                onSave: (value) {},
+                validator: (value) {
+                  return null;
+                },
+                text: 'Enter Your Name',
+                controller: controller.nameController,
+                isShow: false,
+              ),
+              const SizedBox(height: 20.0),
+              MyText(
                 text: 'Email',
-                textStyle: Theme.of(context).textTheme.bodyLarge,
+                textStyle: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
@@ -78,13 +100,13 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                   return null;
                 },
                 text: 'Enter Your Email Address',
-                controller: emailController,
+                controller: controller.emailController,
                 isShow: false,
               ),
               const SizedBox(height: 20.0),
               MyText(
                 text: 'Password',
-                textStyle: Theme.of(context).textTheme.bodyLarge,
+                textStyle: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 10.0),
               MyTextFormField(
@@ -95,46 +117,55 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 },
                 text: 'Enter Your Password',
                 suffixIcon: const Icon(Icons.visibility_rounded),
-                controller: passwordController,
+                controller: controller.passwordController,
                 isShow: true,
               ),
               const SizedBox(height: 10.0),
-              Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: InkWell(
-                  onTap: () {},
-                  child: MyText(
-                    text: 'forgot password ? ',
-                    textStyle: TextStyle(color: primaryColor.shade500),
-                  ),
-                ),
-              ),
               const SizedBox(height: 20.0),
-              MyBotton(
-                height: 60,
-                color: primaryColor,
-                onPressed: () {},
-                width: double.infinity,
-                text: MyText(
-                  text: 'Sign In',
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              GetX<AuthViewModel>(builder: (context) {
+                return MyBotton(
+                  height: 60,
+                  color: primaryColor,
+                  onPressed: () {
+                    context.createAccountWithEmailAndPassword();
+                  },
+                  width: double.infinity,
+                  text: context.isLoading.value
+                      ? const CupertinoActivityIndicator(color: Colors.white)
+                      : MyText(
+                          text: 'Create Account',
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                );
+              }),
               const SizedBox(height: 30.0),
-              MyBotton(
-                height: 60,
-                borderShow: true,
-                onPressed: () {
-                  Get.toNamed(AppRoutes.register);
-                },
-                width: double.infinity,
-                text: MyText(
-                  text: 'Register',
-                  textStyle: Theme.of(context).textTheme.bodyLarge,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyText(
+                    text: 'Already have an account?',
+                    textStyle: const TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  InkWell(
+                    onTap: () {
+                      Get.offAllNamed(AppRoutes.login);
+                    },
+                    child: MyText(
+                      text: 'Login',
+                      textStyle: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor.shade300,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

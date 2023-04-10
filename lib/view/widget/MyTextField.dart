@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class MyTextFormField extends StatelessWidget {
   MyTextFormField(
       {super.key,
-      required this.controller,
+ this.controller,
       required this.isShow,
       this.suffixIcon,
       required this.text,
@@ -15,7 +15,7 @@ class MyTextFormField extends StatelessWidget {
       this.validator,
       required this.type});
 
-  final TextEditingController controller;
+   TextEditingController? controller;
   final bool isShow;
   Widget? suffixIcon;
   final TextInputType type;

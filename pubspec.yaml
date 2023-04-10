@@ -19,6 +19,7 @@ dependencies:
   firebase_auth: ^4.4.0
   google_sign_in: ^6.1.0
   flutter_login_facebook: ^1.8.0
+  shared_preferences: ^2.1.0
 
 
 dev_dependencies:
