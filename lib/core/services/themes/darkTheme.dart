@@ -13,17 +13,31 @@ class DarkTheme {
       unselectedItemColor: Colors.grey,
     ),
     textTheme: const TextTheme(
+      titleMedium: TextStyle(
+        color: Colors.white70,
+        height: 2,
+        fontSize: 14,
+      ),
+      headlineLarge: TextStyle(
+        color: Colors.white70,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'SourceSansPro',
+        fontSize: 30.0,
+      ),
       bodyLarge: TextStyle(
         fontSize: 14,
         color: Colors.white70,
+        fontFamily: 'SourceSansPro',
       ),
       bodyMedium: TextStyle(
         fontSize: 15,
         color: Colors.white38,
+        fontFamily: 'SourceSansPro',
       ),
       bodySmall: TextStyle(
         fontSize: 15,
         color: Colors.grey,
+        fontFamily: 'SourceSansPro',
       ),
     ),
     appBarTheme: const AppBarTheme(

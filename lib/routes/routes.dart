@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/middleware/middleware.dart';
+import 'package:ecommerce_app/core/view_model/home_view_model.dart';
 import 'package:ecommerce_app/util/binding.dart';
 import 'package:ecommerce_app/view/auth/login_view.dart';
 
@@ -20,7 +21,8 @@ class AppRoutes {
     ),
     GetPage(
       name: home,
-      page: () => HomeScreen(),
+      binding: Binding(),
+      page: () =>  HomeScreen(),
     ),
     GetPage(
       name: initState,

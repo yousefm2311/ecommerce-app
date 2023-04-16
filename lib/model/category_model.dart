@@ -4,7 +4,7 @@ class CategoryModel {
 
   CategoryModel({this.name, this.image});
 
-  CategoryModel.formJson(Map<dynamic, dynamic> json) {
+  CategoryModel.fromJson(Map<dynamic, dynamic> json) {
     if (json.isEmpty) {
       return;
     }
