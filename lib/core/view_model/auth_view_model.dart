@@ -1,6 +1,8 @@
 // ignore_for_file: unused_field, unused_local_variable, import_of_legacy_library_into_null_safe
 
 import 'package:ecommerce_app/core/services/SettingsServices.dart';
+import 'package:ecommerce_app/core/services/firestore_user.dart';
+import 'package:ecommerce_app/model/user_model.dart';
 import 'package:ecommerce_app/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -41,7 +43,12 @@ class AuthViewModel extends GetxController {
         idToken: googleSignInAuthentication.idToken,
       );
 
-      await _auth.signInWithCredential(credential);
+      await _auth.signInWithCredential(credential).then((value) async {
+        shared.sharedPref!.setString('uId', value.user!.uid);
+        saveToFireStore(value);
+
+        Get.offAllNamed(AppRoutes.initState);
+      });
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled') {
         Get.snackbar('Cancel', e.toString());
@@ -81,7 +88,7 @@ class AuthViewModel extends GetxController {
         }
         isLoading.value = false;
         shared.sharedPref!.setString('uId', value.user!.uid);
-        Get.offAllNamed(AppRoutes.home);
+        Get.offAllNamed(AppRoutes.initState);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -101,7 +108,7 @@ class AuthViewModel extends GetxController {
           .createUserWithEmailAndPassword(
               email: emailController.text.trim(),
               password: passwordController.text)
-          .then((value) {
+          .then((value) async {
         if (kDebugMode) {
           print(value.user!.email);
         }
@@ -112,7 +119,9 @@ class AuthViewModel extends GetxController {
           colorText: Colors.white,
         );
         isLoading.value = false;
-        Get.offAllNamed(AppRoutes.home);
+        shared.sharedPref!.setString('uId', value.user!.uid);
+        saveToFireStore(value);
+        Get.offAllNamed(AppRoutes.initState);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -132,5 +141,18 @@ class AuthViewModel extends GetxController {
       Get.snackbar('Error create account', e.toString());
       isLoading.value = false;
     }
+  }
+
+  void saveToFireStore(UserCredential user) async {
+    UserModel userModel = UserModel(
+      uId: user.user!.uid,
+      email: user.user!.email,
+      name: nameController.text.isEmpty
+          ? user.user!.displayName
+          : nameController.text,
+      image: user.user!.photoURL,
+    );
+
+    await FireStoreUser().addUserToFireStore(userModel);
   }
 }

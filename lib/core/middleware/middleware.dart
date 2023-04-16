@@ -9,7 +9,7 @@ class AuthMiddleWare extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     if (shared.sharedPref!.getString('uId') != null) {
-      return RouteSettings(name: AppRoutes.home);
+      return RouteSettings(name: AppRoutes.initState);
     }
     return null;
   }

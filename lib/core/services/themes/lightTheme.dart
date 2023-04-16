@@ -7,7 +7,16 @@ class LightTheme {
   ThemeData customLightTheme = ThemeData.light().copyWith(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: Colors.white,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      elevation: 0,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.grey,
+    ),
     textTheme: const TextTheme(
+      labelLarge: TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+      ),
       bodyLarge: TextStyle(
         fontSize: 14,
         color: Colors.black,

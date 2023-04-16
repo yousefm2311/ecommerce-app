@@ -56,7 +56,9 @@ class Registerview extends GetWidget<AuthViewModel> {
                       width: double.infinity,
                       icon: MdiIcons.google,
                       iconSize: 40,
-                      onTap: () {},
+                      onTap: () {
+                        controller.googleSignIn();
+                      },
                     ),
                   ),
                   const SizedBox(width: 20.0),

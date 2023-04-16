@@ -20,6 +20,8 @@ dependencies:
   google_sign_in: ^6.1.0
   flutter_login_facebook: ^1.8.0
   shared_preferences: ^2.1.0
+  cloud_firestore: ^4.5.1
+  iconly: ^1.0.1
 
 
 dev_dependencies:
@@ -33,4 +35,10 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/watch.jpg
+  fonts:
+
+      - family: IconBroken
+        fonts:
+          - asset: assets/fonts/icons.ttf
 

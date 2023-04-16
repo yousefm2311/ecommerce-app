@@ -8,6 +8,7 @@ class MyTextFormField extends StatelessWidget {
   MyTextFormField(
       {super.key,
  this.controller,
+ this.perfixIcon,
       required this.isShow,
       this.suffixIcon,
       required this.text,
@@ -22,6 +23,7 @@ class MyTextFormField extends StatelessWidget {
   final String text;
   Function(String?)? onSave;
   String? Function(String?)? validator;
+  Widget? perfixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class MyTextFormField extends StatelessWidget {
         hintText: text,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
         suffixIcon: suffixIcon,
+        prefixIcon: perfixIcon,
         suffixIconColor: primaryColor,
         fillColor: Get.isDarkMode
             ? const Color.fromARGB(255, 29, 29, 29)

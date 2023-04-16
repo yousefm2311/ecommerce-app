@@ -7,6 +7,11 @@ class DarkTheme {
   ThemeData customDarkTheme = ThemeData.dark().copyWith(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: const Color.fromARGB(221, 17, 16, 16),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      elevation: 0,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.grey,
+    ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(
         fontSize: 14,
