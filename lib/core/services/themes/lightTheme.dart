@@ -12,7 +12,12 @@ class LightTheme {
       selectedItemColor: primaryColor,
       unselectedItemColor: Colors.grey,
     ),
+
     textTheme: const TextTheme(
+      displaySmall: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+      ),
       titleMedium: TextStyle(
         color: Colors.black87,
         height: 2,

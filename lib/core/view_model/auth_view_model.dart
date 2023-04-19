@@ -4,6 +4,8 @@ import 'package:ecommerce_app/core/services/SettingsServices.dart';
 import 'package:ecommerce_app/core/services/firestore_user.dart';
 import 'package:ecommerce_app/model/user_model.dart';
 import 'package:ecommerce_app/routes/routes.dart';
+import 'package:ecommerce_app/util/local_storage_data.dart';
+import 'package:ecommerce_app/view/control_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,8 @@ class AuthViewModel extends GetxController {
   TextEditingController nameController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final LocalStorageData localStorageData = Get.put(LocalStorageData());
 
   // Rx<User?>? _user;
   // String? get user => _user!.value!.email;
@@ -44,10 +48,10 @@ class AuthViewModel extends GetxController {
       );
 
       await _auth.signInWithCredential(credential).then((value) async {
-        shared.sharedPref!.setString('uId', value.user!.uid);
         saveToFireStore(value);
-
-        Get.offAllNamed(AppRoutes.initState);
+        shared.sharedPref!.setString('uId', value.user!.uid).then((value) {
+          Get.offAllNamed(AppRoutes.initState);
+        });
       });
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled') {
@@ -82,13 +86,18 @@ class AuthViewModel extends GetxController {
       final credential = await _auth
           .signInWithEmailAndPassword(
               email: emailController.text, password: passwordController.text)
-          .then((value) {
+          .then((value) async {
         if (kDebugMode) {
           print(value);
         }
         isLoading.value = false;
         shared.sharedPref!.setString('uId', value.user!.uid);
         Get.offAllNamed(AppRoutes.initState);
+        await FireStoreUser()
+            .getUserDataFromFirebase(value.user!.uid)
+            .then((value) {
+          setUser(UserModel.fromJson(value.data()));
+        });
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -152,7 +161,11 @@ class AuthViewModel extends GetxController {
           : nameController.text,
       image: user.user!.photoURL,
     );
-
     await FireStoreUser().addUserToFireStore(userModel);
+    setUser(userModel);
+  }
+
+  void setUser(UserModel user) async {
+    await localStorageData.setUser(user);
   }
 }

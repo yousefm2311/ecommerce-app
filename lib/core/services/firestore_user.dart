@@ -17,4 +17,8 @@ class FireStoreUser {
       }
     });
   }
+
+  Future getUserDataFromFirebase(String uId) async {
+    return await _userCollectionRef.doc(uId).get();
+  }
 }

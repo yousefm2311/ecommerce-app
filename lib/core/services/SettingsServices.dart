@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:ecommerce_app/core/services/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';

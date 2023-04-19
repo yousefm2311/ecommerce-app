@@ -12,5 +12,6 @@ class AuthMiddleWare extends GetMiddleware {
       return RouteSettings(name: AppRoutes.initState);
     }
     return null;
+    // return RouteSettings(name: AppRoutes.login);
   }
 }

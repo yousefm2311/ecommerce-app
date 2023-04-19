@@ -15,7 +15,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class LoginView extends GetWidget<AuthViewModel> {
   const LoginView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

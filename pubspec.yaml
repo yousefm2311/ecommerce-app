@@ -1,7 +1,7 @@
 name: ecommerce_app
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: 'none'
 
 
 version: 1.0.0+1
@@ -23,6 +23,9 @@ dependencies:
   cloud_firestore: ^4.5.1
   iconly: ^1.0.1
   cached_network_image: ^3.2.3
+  sqflite: ^2.2.6
+  path: ^1.8.2
+  dartz: ^0.10.1
 
 
 dev_dependencies:

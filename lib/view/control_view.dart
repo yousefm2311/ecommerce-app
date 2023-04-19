@@ -9,7 +9,9 @@ class ControlView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ControlViewModel>(builder: (controller) {
+    return GetBuilder<ControlViewModel>(
+      init: ControlViewModel(),
+      builder: (controller) {
       return Scaffold(
         body: controller.screens[controller.currentIndex],
         bottomNavigationBar: bottomNavigationBar(),

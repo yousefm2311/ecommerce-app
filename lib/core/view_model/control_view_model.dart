@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class ControlViewModel extends GetxController {
   int currentIndex = 0;
 
-  List<Widget> screens = [ HomeScreen(), const CartView(), const ProfileView()];
+  List<Widget> screens = [HomeScreen(), const CartView(), const ProfileView()];
   void changeCurrentIndex(index) {
     currentIndex = index;
     update();

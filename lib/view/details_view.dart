@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/constance.dart';
+import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
+import 'package:ecommerce_app/model/cart_product_model.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/view/widget/MyBotton.dart';
 import 'package:ecommerce_app/view/widget/MyText.dart';
@@ -173,15 +175,28 @@ class DetailsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  MyBotton(
-                      color: primaryColor,
-                      onPressed: () {},
-                      text: const Text(
-                        'Add',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      width: 150,
-                      height: 50)
+                  GetBuilder<CartViewModel>(
+                      init: CartViewModel(),
+                      builder: (controller) {
+                        return MyBotton(
+                            color: primaryColor,
+                            onPressed: () {
+                              controller.addProductToCart(
+                                CartProductModel(
+                                    name: productModel.name,
+                                    image: productModel.image,
+                                    price: productModel.price,
+                                    quantity: 1,
+                                    productId: productModel.productId),
+                              );
+                            },
+                            text: const Text(
+                              'Add',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            width: 150,
+                            height: 50);
+                      })
                 ],
               ),
             ),
