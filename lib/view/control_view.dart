@@ -20,7 +20,9 @@ class ControlView extends StatelessWidget {
   }
 
   Widget bottomNavigationBar() {
-    return GetBuilder<ControlViewModel>(builder: (controller) {
+    return GetBuilder<ControlViewModel>(
+
+      builder: (controller) {
       return BottomNavigationBar(
         currentIndex: controller.currentIndex,
         onTap: (value) {

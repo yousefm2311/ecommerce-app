@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/services/database/cart_database_helper.dart';
+import 'package:ecommerce_app/core/view_model/home_view_model.dart';
 import 'package:ecommerce_app/model/cart_product_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ class CartViewModel extends GetxController {
 
   List<CartProductModel> _cartProductModel = [];
   List<CartProductModel> get cartProductModel => _cartProductModel;
+
+  HomeViewModel c = Get.put(HomeViewModel());
 
   double get totalPrice => _totalPrice;
   double _totalPrice = 0.0;
@@ -45,7 +48,7 @@ class CartViewModel extends GetxController {
     } else {
       // bool found = false;
       // for (int i = 0; i < _cartProductModel.length; i++) {
-      //   if (_cartProductModel[i].productId == cartProductModel.productId) {
+      //   if ( _cartProductModel[i].productId == cartProductModel.productId) {
       //     found = true;
       //     break;
       //   } else if (!found) {

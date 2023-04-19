@@ -20,7 +20,7 @@ class CartDatabaseHelper {
   }
 
   initDb() async {
-    String path = join(await getDatabasesPath(), 'cart-Product.db');
+    String path = join(await getDatabasesPath(), 'cartProduct.db');
 
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {

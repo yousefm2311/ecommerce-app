@@ -122,7 +122,7 @@ class DetailsView extends StatelessWidget {
                                 width: 20,
                                 height: 20,
                                 decoration: BoxDecoration(
-                                    color: productModel.color,
+                                    color: productModel.color ,
                                     borderRadius:
                                         BorderRadiusDirectional.circular(5)),
                               ),

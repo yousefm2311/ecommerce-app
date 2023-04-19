@@ -17,6 +17,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(builder: (controller) {
       return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            controller.addPrduct();
+          },
+          child: const Icon(Icons.add),
+        ),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top: 70.0, left: 20.0, right: 20.0),
@@ -87,30 +93,29 @@ class HomeScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.grey.shade100),
-                            child: CachedNetworkImage(
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                    imageUrl:
-                                        controller.categoryModel[index].image!,
-                                    placeholder: (context, url) => const Center(
-                                        child: CupertinoActivityIndicator()),
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      )),
-                                    ),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.grey.shade100),
+                              child: CachedNetworkImage(
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                imageUrl:
+                                    controller.categoryModel[index].image!,
+                                placeholder: (context, url) => const Center(
+                                    child: CupertinoActivityIndicator()),
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
                                   )),
-                          ),
+                                ),
+                              )),
                         ),
-                      
+                      ),
                       MyText(
                         text: controller.categoryModel[index].name!,
                         textStyle: Theme.of(context).textTheme.bodyLarge,
