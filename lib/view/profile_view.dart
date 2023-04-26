@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/constance.dart';
 import 'package:ecommerce_app/core/view_model/profile_view_model.dart';
 import 'package:ecommerce_app/view/widget/MyAppBar.dart';
+import 'package:ecommerce_app/view/widget/MyBotton.dart';
 import 'package:ecommerce_app/view/widget/MyListTile.dart';
 import 'package:ecommerce_app/view/widget/MyText.dart';
 import 'package:ecommerce_app/view/widget/icon_broken.dart';
@@ -87,7 +89,45 @@ class ProfileView extends StatelessWidget {
                         ),
                         const SizedBox(height: 40.0),
                         MyListTile(
-                          onTap: () {},
+                          onTap: () {
+                            // Get.bottomSheet(
+                            //     Container(
+                            //       decoration: const BoxDecoration(
+                            //           color: Colors.blue,
+                            //           borderRadius: BorderRadius.only(
+                            //             topLeft: Radius.circular(20.0),
+                            //             topRight: Radius.circular(20.0),
+                            //           )),
+                            //       height: 200.0,
+                            //     ),
+                            //     clipBehavior: Clip.antiAlias);
+                            Get.defaultDialog(
+                                title: 'Edit Profile',
+                                titleStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                content: Column(),
+                                confirm: MyBotton(
+                                  onPressed: () {},
+                                  text: MyText(
+                                    text: 'Confirm',
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.06,
+                                  color: primaryColor,
+                                ));
+                          },
                           text: 'Edit Profile',
                           iconLeading: IconBroken.Edit,
                           iconTrailing: IconBroken.Arrow___Right_2,
