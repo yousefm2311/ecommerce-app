@@ -5,7 +5,6 @@ import 'package:ecommerce_app/core/services/firestore_user.dart';
 import 'package:ecommerce_app/model/user_model.dart';
 import 'package:ecommerce_app/routes/routes.dart';
 import 'package:ecommerce_app/util/local_storage_data.dart';
-import 'package:ecommerce_app/view/control_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +158,8 @@ class AuthViewModel extends GetxController {
       name: nameController.text.isEmpty
           ? user.user!.displayName
           : nameController.text,
-      image: user.user!.photoURL,
+      image: user.user!.photoURL ??
+          'https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg',
     );
     await FireStoreUser().addUserToFireStore(userModel);
     setUser(userModel);

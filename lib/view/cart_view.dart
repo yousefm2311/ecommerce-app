@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/constance.dart';
 import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
 import 'package:ecommerce_app/model/cart_product_model.dart';
-import 'package:ecommerce_app/model/product_model.dart';
+import 'package:ecommerce_app/view/widget/MyAppBar.dart';
 import 'package:ecommerce_app/view/widget/MyBotton.dart';
 import 'package:ecommerce_app/view/widget/MyText.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +15,13 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(
+        isCenter: true,
+        text: MyText(
+          text: 'Cart ',
+          textStyle: Theme.of(context).textTheme.labelLarge,
+        ),
+      ),
       body: GetBuilder<CartViewModel>(
           init: CartViewModel(),
           builder: (controller) {

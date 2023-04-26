@@ -22,23 +22,22 @@ class HomeService {
   addProduct(ProductModel model) async {
     return await _productCollectionRef.add(model.toMap()).then(
       (value) {
-        update(id: value.id,model);
+        update(id: value.id, model);
       },
     ).catchError(
       (error) {},
     );
   }
 
-  update(ProductModel model,{required id}) async {
+  update(ProductModel model, {required id}) async {
     ProductModel productModel = ProductModel(
-        description:
-            model.description,
-        image:
-            model.image,
-        price: model.price,
-        name: model.name,
-        size: model.size,
-        productId: id);
+      description: model.description,
+      image: model.image,
+      price: model.price,
+      name: model.name,
+      size: model.size,
+      productId: id,
+    );
 
     return await _productCollectionRef
         .doc(id)

@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  MyAppBar({super.key, required this.text, this.leading, this.actions});
+  MyAppBar({super.key, required this.text, this.leading, this.actions,this.isCenter = false});
   final Widget text;
   Widget? leading;
   List<Widget>? actions;
+ final  bool isCenter ;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: isCenter,
       titleTextStyle: TextStyle(
           color: Get.isDarkMode ? Colors.white : Colors.black,
           fontSize: 22.0,
